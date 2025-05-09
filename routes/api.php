@@ -14,3 +14,7 @@ Route::get('/mahasiswa',[MahasiswaController::class,'getMahasiswa']);
 Route::post('mahasiswa',[MahasiswaController::class, 'tambahData']);
 
 Route::put('mahasiswa/{mahasiswa:nim}', [MahasiswaController::class,'updateData']);
+
+Route::delete('mahasiswa/{mahasiswa:nim}', [MahasiswaController::class,'deleteData']);
+
+Route::patch('mahasiswa/{mahasiswa:nim}', [MahasiswaController::class,'patchData']);

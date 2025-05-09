@@ -32,14 +32,38 @@ class MahasiswaController extends Controller
     public function updateData(Request $request, Mahasiswa $mahasiswa)
     {
         $validated = $request->validate([
-            'nama' => ['sometimes','required', 'string', 'max:255'],
-            'email' => ['sometimes','required', 'email', 'max:255', 'unique:users,email,'.$mahasiswa->email],
-            'jurusan' => ['sometimes','required', 'string']
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$mahasiswa->email],
+            'jurusan' => ['required', 'string']
         ]);
 
         $mahasiswa->update($validated);
 
         return response()->json([
             'data' => $mahasiswa],200);
+    }
+
+    public function patchData(Request $request, Mahasiswa $mahasiswa)
+    {
+        $validated = $request->validate([
+            'nama' => ['sometimes', 'string', 'max:255'],
+            'email' => ['sometimes', 'email', 'max:255', 'unique:users,email,'.$mahasiswa->email],
+            'jurusan' => ['sometimes', 'string']
+        ]);
+
+        $mahasiswa->update($validated);
+
+        return response()->json([
+            'data' => $mahasiswa],200);
+    }
+
+
+    public function deleteData(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->delete();
+
+        return response()->json([
+            'data' => ''
+      ],203);
     }
 }
